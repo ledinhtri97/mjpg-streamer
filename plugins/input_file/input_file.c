@@ -285,7 +285,7 @@ void *worker_thread(void *arg)
 	    while( token != NULL ) {
      		snprintf(namefile, sizeof(namefile), "%s", token);
             	token = strtok(NULL, ".");
-		if ((strcmp(token, "jpg") == 0) || (strcmp(token, "JPG") == 0)) {
+		if ((strcmp(token, "jpg") == 0) || (strcmp(token, "JPG") == 0) || (strcmp(token, "jpeg") == 0)) {
 	        	snprintf(imgfile, sizeof(imgfile), "%s.%s", namefile, token);
 			break;
 		}
@@ -300,7 +300,8 @@ void *worker_thread(void *arg)
             DBG("new file detected: %s\n", buffer);
         } else {
             if ((strstr(fileList[currentFileNumber]->d_name, ".jpg") != NULL) ||
-                (strstr(fileList[currentFileNumber]->d_name, ".JPG") != NULL)) {
+                (strstr(fileList[currentFileNumber]->d_name, ".JPG") != NULL ||
+		(strstr(fileList[currentFileNumber]->d_name, ".jpeg") != NULL))) {
                 hasJpgFile = 1;
                 DBG("serving file: %s\n", fileList[currentFileNumber]->d_name);
                 snprintf(buffer, sizeof(buffer), "%s%s", folder, fileList[currentFileNumber]->d_name);
